@@ -8,7 +8,8 @@ CLIENT_SECRET: abcde
 USER_ID: 123456
 
 # According to Twitch documentation you shouldn't run stuff more than 800 times a minute (that's 13.33 times per second)
-POLL_FREQUENCY: 0.5
+# However I'm told due to caching it might be better to make it a bit higher.
+POLL_FREQUENCY: 3
 
 # Never caches twitch oauth, if it keeps breaking or whatever.
 NEVER_CACHE_TWITCH: false
