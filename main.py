@@ -24,6 +24,8 @@ POLL_FREQUENCY = config["POLL_FREQUENCY"]
 CLIENT_ID = config["CLIENT_ID"]
 CLIENT_SECRET = config["CLIENT_SECRET"]
 
+INACTIVE_COUNT = config["INACTIVE_COUNT"]
+
 NEVER_CACHE_TWITCH = config.get("NEVER_CACHE_TWITCH", False)
 
 DEBUG = config["DEBUG"]
@@ -102,7 +104,7 @@ poll_feeds = set()
 
 @app.route("/")
 async def index():
-    return await render_template("index.html")
+    return await render_template("index.html", inactive_count=INACTIVE_COUNT)
 
 
 async def poll_receiving():

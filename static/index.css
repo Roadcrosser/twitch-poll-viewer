@@ -17,6 +17,11 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition: opacity 500ms;
+}
+
+.hidden {
+    opacity: 0;
 }
 
 #votetitle {
@@ -84,12 +89,16 @@ body {
     transition: width 500ms;
 }
 
-.votebar-fg.top-vote {
+.top-vote .votebar-fg {
     background-color: #00DB84;
 }
 
-.votebar-bg.top-vote {
+.top-vote .votebar-bg {
     background-color: #00F593;
+}
+
+.top-vote .vote-text {
+    color: black;
 }
 
 .votelist-item {

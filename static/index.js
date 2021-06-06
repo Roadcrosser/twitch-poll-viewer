@@ -3,8 +3,6 @@ let list, timer, votelist;
 let timerStart = null;
 let timerEnd = null;
 
-let last_timestamp = null;
-
 
 class VoteList {
     constructor(votelist) {
@@ -59,7 +57,7 @@ class VoteList {
             voteitem.find(".vote-info").text(`${votecount > 0 ? Math.round(voteratio * 100) : 0}% (${votecount})`)
 
             if (i == 0 && !this.is_running) {
-                voteitem.find(".votebar-bg .votebar-fg").addClass("top-vote");
+                voteitem.addClass("top-vote");
             }
         }
 
@@ -137,7 +135,7 @@ $(() => {
 
 function animateTimer() {
     if (timerStart !== null && timerEnd !== null) {
-        timer.removeClass("timer-inactive");
+        $(".votebox").removeClass("hidden");
         let currtime = Date.now();
         let timeelapsed = currtime - timerStart;
         let totaltime = timerEnd - timerStart;
@@ -146,8 +144,11 @@ function animateTimer() {
         $("#timerbar-fg").css("width", `${percentage}%`);
         $("#timernumber").text(Math.ceil((totaltime - timeelapsed) / 1000));
 
-    } else {
-        timer.addClass("timer-inactive");
+        // wait for n seconds before hiding
+        if (inactive_count !== null && currtime - timerEnd > inactive_count * 1000) {
+            $(".votebox").addClass("hidden");
+        }
+
     }
 
     window.requestAnimationFrame(animateTimer);

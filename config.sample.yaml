@@ -11,6 +11,9 @@ USER_ID: 123456
 # However I'm told due to caching it might be better to make it a bit higher.
 POLL_FREQUENCY: 3
 
+# How long to keep a finished poll up. Set to `null` to disable.
+INACTIVE_COUNT: 30
+
 # Never caches twitch oauth, if it keeps breaking or whatever.
 NEVER_CACHE_TWITCH: false
 
