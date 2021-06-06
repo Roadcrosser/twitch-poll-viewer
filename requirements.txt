@@ -1,0 +1,5 @@
+twitchAPI>=2.3.2
+PyYAML
+git+git://github.com/pgjones/quart
+aiohttp
+python-dateutil

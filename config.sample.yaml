@@ -1,0 +1,17 @@
+# Create a Twitch application here: https://dev.twitch.tv/console/apps/create
+# (Twitch will complain if you don't have 2-Factor Authentication enabled though)
+# Set the OAuth Redirect URL to http://localhost:17563
+CLIENT_ID: 12345
+CLIENT_SECRET: abcde
+
+# Twitch user id. Use https://codepen.io/Alca/full/RwaredM to get yours.
+USER_ID: 123456
+
+# According to Twitch documentation you shouldn't run stuff more than 800 times a minute (that's 13.33 times per second)
+POLL_FREQUENCY: 0.5
+
+# Never caches twitch oauth, if it keeps breaking or whatever.
+NEVER_CACHE_TWITCH: false
+
+# Debug mode. Set to true for testing purposes.
+DEBUG: false
