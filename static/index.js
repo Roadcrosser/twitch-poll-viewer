@@ -3,6 +3,8 @@ let list, timer, votelist;
 let timerStart = null;
 let timerEnd = null;
 
+let last_timestamp = null;
+
 
 class VoteList {
     constructor(votelist) {
@@ -54,7 +56,7 @@ class VoteList {
 
             voteitem.find(".votebar-bg .votebar-fg").css("width", `${voteratio * 100}%`);
             voteitem.css("margin-top", `${votelistitemheight * i}px`);
-            voteitem.find(".vote-info").text(`${Math.round(voteratio * 100)}% (${votecount})`)
+            voteitem.find(".vote-info").text(`${votecount > 0 ? Math.round(voteratio * 100) : 0}% (${votecount})`)
 
             if (i == 0 && !this.is_running) {
                 voteitem.find(".votebar-bg .votebar-fg").addClass("top-vote");

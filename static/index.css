@@ -9,7 +9,7 @@ body {
     font-family: "Sen";
     font-size: 1em;
     font-weight: bold;
-    background: white;
+    background: #18181B;
     border-radius: 0.2em;
     box-shadow: 0 2px 8px black;
     width: 300px;
@@ -24,6 +24,7 @@ body {
     padding-left: 0.5em;
     padding-right: 0.5em;
 }
+
 #votetimer {
     width: 100%;
     height: 20%;
@@ -41,7 +42,7 @@ body {
     margin-right: 5px;
     width: 100%;
     height: 8px;
-    border-radius: 0.2em;
+    border-radius: 0.3em;
     display: block;
     background: grey;
 }
@@ -73,18 +74,22 @@ body {
     height: 30px;
     display: flex;
     align-items: center;
-    background: lightgray;
+    background: #242427;
 }
 
 .votebar-fg {
     border-radius: 0.2em;
     height: 100%;
-    background: darkgray;
+    background: #3A3A3D;
     transition: width 500ms;
 }
 
-.top-vote {
-    background-color: #00E6CB;
+.votebar-fg.top-vote {
+    background-color: #00DB84;
+}
+
+.votebar-bg.top-vote {
+    background-color: #00F593;
 }
 
 .votelist-item {
