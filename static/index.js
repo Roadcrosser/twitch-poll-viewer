@@ -90,7 +90,6 @@ class VoteList {
 }
 
 function process_payload(payload) {
-    console.log(payload)
     $("#votetitle").text(payload.title);
     votelist.setRunning(payload.is_running);
     votelist.setVotes(payload.choices);
@@ -144,8 +143,10 @@ function animateTimer() {
         $("#timerbar-fg").css("width", `${percentage}%`);
         $("#timernumber").text(Math.ceil((totaltime - timeelapsed) / 1000));
 
+        console.log(currtime - timerEnd)
+        console.log(inactive_count * 1000)
         // wait for n seconds before hiding
-        if (inactive_count !== null && currtime - timerEnd > inactive_count * 1000) {
+        if (inactive_count !== null && (currtime - timerEnd) > (inactive_count * 1000)) {
             $(".votebox").addClass("hidden");
         }
 
