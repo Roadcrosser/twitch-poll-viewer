@@ -98,8 +98,8 @@ function process_payload(payload) {
 
     if (payload.is_running) {
         time_end += payload.duration;
+        setTimer(payload.started, time_end);
     }
-    setTimer(payload.started, time_end);
 }
 
 $(() => {
