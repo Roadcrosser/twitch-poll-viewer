@@ -38,6 +38,7 @@ class VoteList {
 
         let votelistitemheight = 40; // TODO: get this dynamically
 
+        let top_count = null;
 
         for (let i = 0; i < voteslist.length; i++) {
             let voteid = voteslist[i][0];
@@ -47,17 +48,24 @@ class VoteList {
 
             let voteitem = this.allvotes[voteid];
             if (voteitem === undefined) {
-                voteitem = this.generateVoteDisplay(votename, i);
+                voteitem = this.generateVoteDisplay(votename);
 
                 this.allvotes[voteid] = voteitem;
             }
 
             voteitem.find(".votebar-bg .votebar-fg").css("width", `${voteratio * 100}%`);
             voteitem.css("margin-top", `${votelistitemheight * i}px`);
-            voteitem.find(".vote-info").text(`${votecount > 0 ? Math.round(voteratio * 100) : 0}% (${votecount})`)
+
+            voteitem.find(".votepercentage-ani").css("--num", votecount > 0 ? Math.round(voteratio * 100) : 0);
+            voteitem.find(".votecount-ani").css("--num", votecount);
 
             if (i == 0 && !this.is_running) {
+                top_count == votecount;
+            }
+            if (votecount == top_count) {
                 voteitem.addClass("top-vote");
+            } else {
+                voteitem.removeClass("top-vote");
             }
         }
 
@@ -66,13 +74,19 @@ class VoteList {
     }
 
     generateVoteDisplay(votename) {
-        let new_vote = $("<li></li>");
+        let new_vote = $("<li></li>")
         new_vote.addClass("votelist-item");
 
         let votebar_bg = $("<div></div>").addClass("votebar-bg");
         let votebar_fg = $("<div></div>").addClass("votebar-fg");
-        let vote_text = $("<div></div>").addClass("vote-text")
-        vote_text.append($("<div></div>").text(votename)).append($("<div></div>").addClass("vote-info"))
+        let vote_text = $("<div></div>").addClass("vote-text");
+
+        let vote_info = $("<div></div>").addClass("vote-info").append(
+            $("<span></span>").addClass("votepercentage-ani")
+        ).append("% ("
+        ).append($("<span></span>").addClass("votecount-ani")
+        ).append(")");
+        vote_text.append($("<div></div>").text(votename)).append(vote_info);
 
         votebar_fg.css("width", "0%");
         new_vote.css("margin-top", "-100%");
