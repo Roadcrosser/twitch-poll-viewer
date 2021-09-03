@@ -81,8 +81,8 @@ def setup_twitch():
 
     # Gotta do this when the lib doesn't support it yet
     class extra_scopes(Enum):
-        CHANNEL_READ_POLLS = ("channel:read:polls",)
-        CHANNEL_MANAGE_POLLS = ("channel:manage:polls",)
+        CHANNEL_READ_POLLS = "channel:read:polls"
+        CHANNEL_MANAGE_POLLS = "channel:manage:polls"
 
     target_scope = [extra_scopes.CHANNEL_READ_POLLS, extra_scopes.CHANNEL_MANAGE_POLLS]
 
