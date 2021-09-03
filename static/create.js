@@ -28,6 +28,10 @@ $(() => {
 
         let duration = Number($("#timer-select").val());
 
+        if (title.length == 0 || choices.length < 2) {
+            return;
+        }
+
         let data = {
             "broadcaster_id": user_id,
             "title": title,
