@@ -71,33 +71,41 @@ twitch = Twitch(CLIENT_ID, CLIENT_SECRET)
 twitch.session = None
 
 
-# setting up Authentication and getting your user id
-twitch.authenticate_app([])
+def setup_twitch():
+    # Don't like that I have to do this. Maybe I'll fix it later.
+    global TOKEN
+    global REFRESH_TOKEN
 
-# Gotta do this when the lib doesn't support it yet
-class extra_scopes(Enum):
-    CHANNEL_READ_POLLS = "channel:read:polls"
+    # setting up Authentication and getting your user id
+    twitch.authenticate_app([])
 
+    # Gotta do this when the lib doesn't support it yet
+    class extra_scopes(Enum):
+        CHANNEL_READ_POLLS = ("channel:read:polls",)
+        CHANNEL_MANAGE_POLLS = ("channel:manage:polls",)
 
-target_scope = [extra_scopes.CHANNEL_READ_POLLS]
+    target_scope = [extra_scopes.CHANNEL_READ_POLLS, extra_scopes.CHANNEL_MANAGE_POLLS]
 
-auth = UserAuthenticator(twitch, target_scope, force_verify=False)
+    auth = UserAuthenticator(twitch, target_scope, force_verify=False)
 
-if (not TOKEN) or (not REFRESH_TOKEN) or (NEVER_CACHE_TWITCH):
-    # this will open your default browser and prompt you with the twitch verification website
-    TOKEN, REFRESH_TOKEN = auth.authenticate()
-else:
-    try:
-        TOKEN, REFRESH_TOKEN = refresh_access_token(
-            REFRESH_TOKEN, CLIENT_ID, CLIENT_SECRET
-        )
-    except InvalidRefreshTokenException:
+    if (not TOKEN) or (not REFRESH_TOKEN) or (NEVER_CACHE_TWITCH):
+        ...
+        # this will open your default browser and prompt you with the twitch verification website
         TOKEN, REFRESH_TOKEN = auth.authenticate()
+    else:
+        try:
+            TOKEN, REFRESH_TOKEN = refresh_access_token(
+                REFRESH_TOKEN, CLIENT_ID, CLIENT_SECRET
+            )
+        except InvalidRefreshTokenException:
+            TOKEN, REFRESH_TOKEN = auth.authenticate()
+
+    twitch_secrets["TOKEN"] = TOKEN
+    twitch_secrets["REFRESH_TOKEN"] = REFRESH_TOKEN
+    update_twitch_secrets(twitch_secrets)
 
 
-twitch_secrets["TOKEN"] = TOKEN
-twitch_secrets["REFRESH_TOKEN"] = REFRESH_TOKEN
-update_twitch_secrets(twitch_secrets)
+setup_twitch()
 
 poll_feeds = set()
 
@@ -105,6 +113,13 @@ poll_feeds = set()
 @app.route("/")
 async def index():
     return await render_template("index.html", inactive_count=INACTIVE_COUNT)
+
+
+@app.route("/create")
+async def create():
+    return await render_template(
+        "create.html", token=TOKEN, client_id=CLIENT_ID, user_id=USER_ID
+    )
 
 
 async def poll_receiving():
@@ -154,6 +169,7 @@ async def process_data(data):
     current_poll = max(data, key=lambda x: dateutil.parser.parse(x["started_at"]))
 
     processed_poll = {
+        "id": current_poll["id"],
         "title": current_poll["title"],
         "is_running": current_poll["status"] == "ACTIVE",
         "started": dateutil.parser.parse(current_poll["started_at"]).timestamp() * 1000,
@@ -162,7 +178,7 @@ async def process_data(data):
             [
                 c["id"],
                 c["title"],
-                sum([c["votes"], c["channel_points_votes"], c["bits_votes"]]),
+                c["votes"],
             ]
             for c in current_poll["choices"]
         ],

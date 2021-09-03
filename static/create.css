@@ -1,0 +1,125 @@
+body {
+    background-color: #0E0E10;
+}
+
+body, body * {
+    color: white;
+    font-family: "Sen", sans-serif;
+}
+.main-holder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.poll-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 25em;
+    margin-top: 5em;
+}
+
+input {
+    width: 100%;
+    background-color: #464649;
+    border: solid 2px rgb(0,0,0,0);
+    color: white;
+    padding: 0.25em;
+    border-radius: 0.5em;
+    transition: border-color 100ms, background-color 100ms;
+}
+
+input:hover {
+    border: solid 2px #5E5E60;
+}
+
+input:focus {
+    background-color: black;
+    border: solid 2px #9147FF;
+    outline: none;
+}
+
+.title {
+    font-size: 1.5em;
+}
+
+.input-holder {
+    display:flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-bottom: 0.5em;
+    width: 100%;
+}
+
+.choice {
+    font-size: 1.25em;
+}
+
+.title-input-holder {
+    margin-bottom: 2em;
+}
+
+.text-tiny {
+    font-size: 0.75em;
+}
+
+.button-holder {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.control {
+    color: white;
+    padding: 0.25em;
+    font-size: 1em;
+    border-radius: 0.25em;
+    cursor: pointer;
+    transition: border-color 100ms, background-color 100ms;
+}
+
+button {
+    background-color: #9147FF;
+    border: solid 2px rgba(0,0,0,0);
+    color: white;
+}
+
+button:hover {
+    background-color: #772CE8;
+}
+
+button:active {
+    background-color: #9147FF;
+}
+
+#endbutton {
+    background-color: #464649;
+}
+#endbutton:hover {
+    background-color: #FF4F4D;
+}
+#endbutton:active {
+    background-color: #FFAAA8;
+}
+
+select {
+    background-color: #464649;
+    border: solid 2px rgb(0,0,0,0);
+}
+
+select:hover {
+    border: solid 2px #5E5E60;
+}
+    
+select:focus {
+    background-color: black;
+    border: solid 2px #9147FF;
+    outline: none;
+}
+    
+
+option {
+    outline: none;
+}

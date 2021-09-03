@@ -6,7 +6,7 @@ body {
 .box {
     padding: 1em;
     color: white;
-    font-family: "Sen";
+    font-family: "Sen", sans-serif;
     font-size: 1em;
     font-weight: bold;
     background: #18181B;
