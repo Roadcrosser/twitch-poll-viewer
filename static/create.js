@@ -15,6 +15,11 @@ $(() => {
         }
     );
 
+    let headers = {
+        "Authorization": `Bearer ${token}`,
+        "Client-Id": client_id,
+        "Content-Type": "application/json",
+    }
     function startpoll() {
         let title = $(".title").val();
         let choices = []
@@ -42,10 +47,7 @@ $(() => {
         fetch("https://api.twitch.tv/helix/polls",
             {
                 method: "POST",
-                headers: {
-                    "Authorization": `Bearer ${token}`,
-                    "Client-Id": client_id,
-                },
+                headers: headers,
                 body: JSON.stringify(data)
             }
         ).then((data) => {
@@ -68,10 +70,7 @@ $(() => {
         fetch("https://api.twitch.tv/helix/polls",
             {
                 method: "PATCH",
-                headers: {
-                    "Authorization": `Bearer ${token}`,
-                    "Client-Id": client_id,
-                },
+                headers: headers,
                 body: JSON.stringify(data)
             }
         ).then((data) => {
