@@ -116,6 +116,7 @@ function process_payload(payload) {
         //     // Should fix that at some point.
     }
     console.log(payload.started)
+    console.log(payload.duration)
 
     setTimer(payload.started, time_end);
 }
