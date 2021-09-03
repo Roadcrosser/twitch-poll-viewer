@@ -112,10 +112,12 @@ function process_payload(payload) {
 
     if (payload.is_running) {
         time_end += payload.duration;
-        // We only set the timer while running because of this one weird bug that makes the timer reset or jump up or smth
-        // Should fix that at some point.
-        setTimer(payload.started, time_end);
+        //     // We only set the timer while running because of this one weird bug that makes the timer reset or jump up or smth
+        //     // Should fix that at some point.
     }
+    console.log(payload.started)
+
+    setTimer(payload.started, time_end);
 }
 
 $(() => {
