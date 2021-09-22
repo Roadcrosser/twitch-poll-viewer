@@ -45,6 +45,7 @@ class VoteList {
             let votename = voteslist[i][1];
             let votecount = voteslist[i][2];
             let voteratio = votecount / totalvotecount;
+            let votepercentage = votecount > 0 ? Math.round(voteratio * 100) : 0
 
             let voteitem = this.allvotes[voteid];
             if (voteitem === undefined) {
@@ -56,8 +57,33 @@ class VoteList {
             voteitem.find(".votebar-bg .votebar-fg").css("width", `${voteratio * 100}%`);
             voteitem.css("margin-top", `${votelistitemheight * i}px`);
 
-            voteitem.find(".votepercentage-ani").css("--num", votecount > 0 ? Math.round(voteratio * 100) : 0);
-            voteitem.find(".votecount-ani").css("--num", votecount);
+
+            let votepercentagespan = voteitem.find(".votepercentage-ani");
+            let votecountspan = voteitem.find(".votecount-ani");
+
+            if (!votepercentagespan.text()) {
+                votepercentagespan.text("0")
+            };
+            if (!votecountspan.text()) {
+                votecountspan.text("0")
+            };
+
+            let votebar_obj = {
+                votecount: Number(votecountspan.text()),
+                votepercentage: Number(votepercentagespan.text()),
+            };
+
+            anime({
+                targets: votebar_obj,
+                votecount: votecount,
+                votepercentage: votepercentage,
+                round: 1,
+                duration: 500,
+                easing: "cubicBezier(1, 0, 0, 1)",
+                update: () => {
+                    this.updateVotebar(votepercentagespan, votecountspan, votebar_obj);
+                },
+            });
 
             if (i == 0 && !this.is_running) {
                 top_count == votecount;
@@ -71,6 +97,11 @@ class VoteList {
 
         this.list.css("height", `${votelistitemheight * voteslist.length}px`);
 
+    }
+
+    updateVotebar(votepercentagespan, votecountspan, obj) {
+        votepercentagespan.text(obj.votepercentage)
+        votecountspan.text(obj.votecount)
     }
 
     generateVoteDisplay(votename) {

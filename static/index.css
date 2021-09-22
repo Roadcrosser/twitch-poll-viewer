@@ -123,32 +123,3 @@ body {
     margin-left: auto;
     font-weight: normal;
 }
-
-@property --num {
-    syntax: '<integer>';
-    initial-value: 0;
-    inherits: false;
-  }
-  
-.votepercentage-ani {
-    transition: --num 500ms;
-    counter-reset: num var(--num);
-}
-
-.votepercentage-ani::after {
-    content: counter(num);
-}
-
-.votepercentage-ani {
-    --num: 500;
-}
-
-  
-.votecount-ani {
-    transition: --num 500ms;
-    counter-reset: num var(--num);
-}
-
-.votecount-ani::after {
-    content: counter(num);
-}

@@ -105,7 +105,7 @@ def setup_twitch():
     update_twitch_secrets(twitch_secrets)
 
 
-setup_twitch()
+# setup_twitch()
 
 poll_feeds = set()
 
@@ -196,7 +196,7 @@ async def send_poll_data(payload):
 
 loop = asyncio.get_event_loop()
 loop.create_task(app.run_task())
-loop.create_task(poll())
+# loop.create_task(poll())
 
 try:
     loop.run_forever()
