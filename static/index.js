@@ -1,7 +1,7 @@
 let list, timer, votelist;
 
 let currPollId = null;
-let runningTracker = false;
+let hasStopped = false;
 let timerStart = null;
 let timerEnd = null;
 
@@ -145,15 +145,15 @@ function process_payload(payload) {
 
     if (currPollId != votelist.id) {
         currPollId = votelist.id;
-        runningTracker = false;
+        hasStopped = false;
 
         let time_end = payload.started + payload.duration;
         setTimer(payload.started, time_end);
     }
 
 
-    if (!payload.is_running && !runningTracker) {
-        runningTracker = true;
+    if (!payload.is_running && !hasStopped) {
+        hasStopped = true;
         let time_end = Date.now()
         setTimer(payload.started, time_end);
     }
