@@ -1,5 +1,7 @@
 let list, timer, votelist;
 
+let currPollId = null;
+let runningTracker = false;
 let timerStart = null;
 let timerEnd = null;
 
@@ -139,16 +141,23 @@ function process_payload(payload) {
     votelist.setRunning(payload.is_running);
     votelist.setVotes(payload.choices);
 
-    let time_end = payload.started;
 
-    if (payload.is_running) {
-        time_end += payload.duration;
-        // We only set the timer while running because of this one weird bug that makes the timer reset or jump up or smth
-        // Should fix that at some point.
-        // Update: Can't reproduce the bug. Strange. Hope it doesn't come back.
+    if (currPollId != votelist.id) {
+        currPollId = votelist.id;
+        runningTracker = false;
+
+        let time_end = payload.started + payload.duration;
+        setTimer(payload.started, time_end);
     }
 
-    setTimer(payload.started, time_end);
+
+    if (!payload.is_running && !runningTracker) {
+        runningTracker = true;
+        let time_end = Date().now()
+        setTimer(payload.started, time_end);
+    }
+
+
 }
 
 $(() => {
