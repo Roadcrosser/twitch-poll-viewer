@@ -70,19 +70,22 @@ class VoteList {
                 votecountspan.text("0")
             };
 
+            if (i == 0 && !this.is_running) {
+                console.log("a")
+                top_count == votecount;
+            }
+            if (votecount == top_count) {
+                console.log("b")
+                voteitem.addClass("top-vote");
+            } else {
+                voteitem.removeClass("top-vote");
+            }
+
             let votebar_obj = {
                 votecount: Number(votecountspan.text()),
                 votepercentage: Number(votepercentagespan.text()),
             };
 
-            if (i == 0 && !this.is_running) {
-                top_count == votecount;
-            }
-            if (votecount == top_count) {
-                voteitem.addClass("top-vote");
-            } else {
-                voteitem.removeClass("top-vote");
-            }
 
             anime({
                 targets: votebar_obj,
@@ -143,8 +146,8 @@ function process_payload(payload) {
     votelist.setVotes(payload.choices);
 
 
-    if (currPollId != votelist.id) {
-        currPollId = votelist.id;
+    if (currPollId != payload.id) {
+        currPollId = payload.id;
         hasStopped = false;
 
         let time_end = payload.started + payload.duration;
@@ -192,15 +195,10 @@ $(() => {
 });
 
 function animateTimer() {
-    console.log(timerStart)
-    console.log(timerEnd)
-    console.log("0")
     if (timerStart !== null && timerEnd !== null) {
-        console.log(timerStart)
         $(".votebox").removeClass("hidden");
         let currtime = Date.now();
         let timeelapsed = currtime - timerStart;
-        console.log(timeelapsed)
         let totaltime = timerEnd - timerStart;
         timeelapsed = Math.min(timeelapsed, totaltime);
         let percentage = (1 - (timeelapsed / totaltime)) * 100;
