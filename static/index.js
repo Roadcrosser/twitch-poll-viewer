@@ -71,11 +71,9 @@ class VoteList {
             };
 
             if (i == 0 && !this.is_running) {
-                console.log("a")
-                top_count == votecount;
+                top_count = votecount;
             }
             if (votecount == top_count) {
-                console.log("b")
                 voteitem.addClass("top-vote");
             } else {
                 voteitem.removeClass("top-vote");
