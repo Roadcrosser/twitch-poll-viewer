@@ -192,6 +192,8 @@ $(() => {
 });
 
 function animateTimer() {
+    console.log(timerStart)
+    console.log(timerEnd)
     if (timerStart !== null && timerEnd !== null) {
         console.log(timerStart)
         $(".votebox").removeClass("hidden");
