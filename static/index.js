@@ -153,7 +153,7 @@ function process_payload(payload) {
 
     if (!payload.is_running && !runningTracker) {
         runningTracker = true;
-        let time_end = Date().now()
+        let time_end = Date.now()
         setTimer(payload.started, time_end);
     }
 
