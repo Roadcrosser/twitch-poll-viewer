@@ -75,6 +75,15 @@ class VoteList {
                 votepercentage: Number(votepercentagespan.text()),
             };
 
+            if (i == 0 && !this.is_running) {
+                top_count == votecount;
+            }
+            if (votecount == top_count) {
+                voteitem.addClass("top-vote");
+            } else {
+                voteitem.removeClass("top-vote");
+            }
+
             anime({
                 targets: votebar_obj,
                 votecount: votecount,
@@ -87,14 +96,6 @@ class VoteList {
                 },
             });
 
-            if (i == 0 && !this.is_running) {
-                top_count == votecount;
-            }
-            if (votecount == top_count) {
-                voteitem.addClass("top-vote");
-            } else {
-                voteitem.removeClass("top-vote");
-            }
         }
 
         this.list.css("height", `${votelistitemheight * voteslist.length}px`);
@@ -192,9 +193,11 @@ $(() => {
 
 function animateTimer() {
     if (timerStart !== null && timerEnd !== null) {
+        console.log(timerStart)
         $(".votebox").removeClass("hidden");
         let currtime = Date.now();
         let timeelapsed = currtime - timerStart;
+        console.log(timeelapsed)
         let totaltime = timerEnd - timerStart;
         timeelapsed = Math.min(timeelapsed, totaltime);
         let percentage = (1 - (timeelapsed / totaltime)) * 100;
