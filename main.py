@@ -88,6 +88,9 @@ def setup_twitch():
 
     auth = UserAuthenticator(twitch, target_scope, force_verify=False)
 
+    auth.port = config.get("OAUTH_PORT", 17563)
+    auth.url = f"http://localhost:{auth.port}"
+
     if (not TOKEN) or (not REFRESH_TOKEN) or (NEVER_CACHE_TWITCH):
         ...
         # this will open your default browser and prompt you with the twitch verification website
@@ -134,9 +137,7 @@ async def control_room_websocket():
 
     poll_feeds.add(obj)
 
-    consumer = asyncio.ensure_future(
-        copy_current_websocket_context(poll_receiving)(),
-    )
+    consumer = asyncio.ensure_future(copy_current_websocket_context(poll_receiving)(),)
     try:
         await asyncio.gather(consumer)
     finally:
@@ -175,12 +176,7 @@ async def process_data(data):
         "started": dateutil.parser.parse(current_poll["started_at"]).timestamp() * 1000,
         "duration": current_poll["duration"] * 1000,
         "choices": [
-            [
-                c["id"],
-                c["title"],
-                c["votes"],
-            ]
-            for c in current_poll["choices"]
+            [c["id"], c["title"], c["votes"],] for c in current_poll["choices"]
         ],
     }
 
@@ -195,7 +191,7 @@ async def send_poll_data(payload):
 
 
 loop = asyncio.get_event_loop()
-loop.create_task(app.run_task())
+loop.create_task(app.run_task(port=config.get("LOCAL_PORT", 5000)))
 loop.create_task(poll())
 
 try:

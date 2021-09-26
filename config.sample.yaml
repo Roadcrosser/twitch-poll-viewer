@@ -1,6 +1,12 @@
+# The port to run the webserver on. Please make sure this is unique across all applications.
+LOCAL_PORT: 5000
+
+# Port to run OAuth callback webserver. Please make sure this is unique across all applications.
+OAUTH_PORT: 17563
+
 # Create a Twitch application here: https://dev.twitch.tv/console/apps/create
 # (Twitch will complain if you don't have 2-Factor Authentication enabled though)
-# Set the OAuth Redirect URL to http://localhost:17563
+# Set the OAuth Redirect URL to http://localhost:17563 (use the right port as specified above)
 CLIENT_ID: 12345
 CLIENT_SECRET: abcde
 
