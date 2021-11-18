@@ -26,9 +26,15 @@ def abort():
 app = Quart(__name__)
 
 CONFIG_FP = "config.yaml"
+SAMPLE_CONFIG_FP = "config.sample.yaml"
 
 if not os.path.isfile(CONFIG_FP):
-    print(f"[ERROR] Config file not found! ({CONFIG_FP})")
+    print(
+        f"[ERROR] Config file not found!\nCreating {CONFIG_FP} from defaults. Please update with proper information."
+    )
+    with open(SAMPLE_CONFIG_FP) as sp:
+        with open(CONFIG_FP, "w+") as fl:
+            fl.write(sp.read())
     abort()
 
 with open(CONFIG_FP) as fl:
