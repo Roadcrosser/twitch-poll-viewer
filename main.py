@@ -195,6 +195,32 @@ loop = asyncio.get_event_loop()
 loop.create_task(app.run_task(port=LOCAL_PORT))
 loop.create_task(poll())
 
+really_long_line = "-" * 50
+print(
+    f"""
+Running Poll Viewer.
+
+Twitch polling rate: Every {POLL_FREQUENCY} seconds. 
+
+{really_long_line}
+
+Add the following URL as a browser source to OBS.
+
+> http://localhost:{LOCAL_PORT} <
+
+{really_long_line}
+
+Optionally, visit the following URL in your browser to access an easy poll creator.
+(You can still use /poll instead if you wish)
+
+> http://localhost:{LOCAL_PORT}/create <
+
+{really_long_line}
+
+"""
+)
+
+
 try:
     loop.run_forever()
 finally:
