@@ -199,7 +199,7 @@ loop.create_task(app.run_task(port=LOCAL_PORT))
 if not _DEBUG_SKIP_TWITCH:
     loop.create_task(poll())
 
-really_long_line = "-" * 50
+really_long_line = "-" * 56
 print(
     f"""
 Running Poll Viewer.
