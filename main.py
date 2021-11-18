@@ -10,6 +10,7 @@ import dateutil.parser
 
 import json
 import os
+import sys
 import aiohttp
 import asyncio
 
@@ -27,8 +28,9 @@ app = Quart(__name__)
 
 CONFIG_FP = "config.yaml"
 SAMPLE_CONFIG_FP = "config.sample.yaml"
-if "_MEIPASS2" in os.environ:
-    SAMPLE_CONFIG_FP = os.path.join(os.environ["_MEIPASS2"], SAMPLE_CONFIG_FP)
+
+if getattr(sys, "frozen", False) and hasattr(sys, "_MEIPASS"):
+    SAMPLE_CONFIG_FP = os.path.join(sys._MEIPASS, SAMPLE_CONFIG_FP)
 
 if not os.path.isfile(CONFIG_FP):
     print(
