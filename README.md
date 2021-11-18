@@ -26,13 +26,15 @@ You should be fine running it for a stream segment that uses a poll or two, or a
     - Add `http://localhost:17563` under **Oauth Redirect URLs**. Remember to click **Add**
     - Select `Application Integration` as your **Category** (not that it matters).
     - It should look something like the image below. Click **Create** when you are done, and then **Manage** on your application once it is created.
-        - ![setup image 1](deploy/assets/setup_img_1.png)
+        - ![setup create application](deploy/assets/setup_create_application.png)
 4. On your **Manage Application** page, click the **New Secret** button at the bottom and click **OK** on the prompt.
 5. Copy your **Client ID** and **Client Secret** values that are displayed on the **Manage Application** page and copy them to `CLIENT_ID` and `CLIENT_SECRET` in your `config.yaml`.
+    - The values in the image below are examples and should not actually be used.
+        -  ![setup client details](deploy/assets/setup_client_details.png)
 6. Get your Twitch ID [here](https://codepen.io/Alca/full/RwaredM).
     - Enter your Twitch username in the `Twitch Login` box, and click **Lookup Login**
     - Your Twitch ID is the 10-digit number that shows underneath your name in the window that pops up, as in the following image (highlighted with the red square).
-        - ![setup image 2](deploy/assets/setup_img_2.png)
+        - ![setup twitch id](deploy/assets/setup_twitch_id.png)
 7. Copy your Twitch ID to `USER_ID` in your `config.yaml`
 8. Save `config.yaml`.
 9. Run the `.exe`. Go through the Twitch prompts that open on your browser.
