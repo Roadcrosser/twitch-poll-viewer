@@ -16,6 +16,8 @@ import asyncio
 
 import yaml
 
+os.system("title Twitch Poll Viewer")
+
 atexit.register(input, "\nAn error may have occured. Press Enter to quit...")
 
 
@@ -179,7 +181,9 @@ async def control_room_websocket():
 
     poll_feeds.add(obj)
 
-    consumer = asyncio.ensure_future(copy_current_websocket_context(poll_receiving)(),)
+    consumer = asyncio.ensure_future(
+        copy_current_websocket_context(poll_receiving)(),
+    )
     try:
         await asyncio.gather(consumer)
     finally:
@@ -218,7 +222,12 @@ async def process_data(data):
         "started": dateutil.parser.parse(current_poll["started_at"]).timestamp() * 1000,
         "duration": current_poll["duration"] * 1000,
         "choices": [
-            [c["id"], c["title"], c["votes"],] for c in current_poll["choices"]
+            [
+                c["id"],
+                c["title"],
+                c["votes"],
+            ]
+            for c in current_poll["choices"]
         ],
     }
 
