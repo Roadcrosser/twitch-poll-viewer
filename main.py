@@ -31,6 +31,8 @@ NEVER_CACHE_TWITCH = config.get("NEVER_CACHE_TWITCH", False)
 LOCAL_PORT = config.get("LOCAL_PORT", 5000)
 OAUTH_PORT = config.get("OAUTH_PORT", 17563)
 
+_DEBUG_SKIP_TWITCH = config.get("_DEBUG_SKIP_TWITCH", False)
+
 twitch_secrets = {
     "TOKEN": None,
     "REFRESH_TOKEN": None,
@@ -109,7 +111,8 @@ def setup_twitch():
     update_twitch_secrets(twitch_secrets)
 
 
-setup_twitch()
+if not _DEBUG_SKIP_TWITCH:
+    setup_twitch()
 
 poll_feeds = set()
 
@@ -193,7 +196,8 @@ async def send_poll_data(payload):
 
 loop = asyncio.get_event_loop()
 loop.create_task(app.run_task(port=LOCAL_PORT))
-loop.create_task(poll())
+if not _DEBUG_SKIP_TWITCH:
+    loop.create_task(poll())
 
 really_long_line = "-" * 50
 print(
