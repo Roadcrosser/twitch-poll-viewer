@@ -239,6 +239,7 @@ Twitch polling rate: Every {POLL_FREQUENCY} seconds.
 Add the following URL as a browser source to OBS.
 
 > http://localhost:{LOCAL_PORT} <
+(Highlight and press ENTER to copy)
 
 {really_long_line}
 
@@ -246,6 +247,7 @@ Optionally, visit the following URL in your browser to access an easy poll creat
 (You can still use /poll instead if you wish)
 
 > http://localhost:{LOCAL_PORT}/create <
+(Highlight and press ENTER to copy)
 
 {really_long_line}
 
