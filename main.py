@@ -1,3 +1,7 @@
+import atexit
+
+atexit.register(input, "\nAn error may have occured. Press Enter to quit...")
+
 from twitchAPI.twitch import Twitch
 from twitchAPI.types import InvalidRefreshTokenException
 from twitchAPI.oauth import UserAuthenticator, refresh_access_token
