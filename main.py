@@ -28,6 +28,9 @@ INACTIVE_COUNT = config["INACTIVE_COUNT"]
 
 NEVER_CACHE_TWITCH = config.get("NEVER_CACHE_TWITCH", False)
 
+LOCAL_PORT = config.get("LOCAL_PORT", 5000)
+OAUTH_PORT = config.get("OAUTH_PORT", 17563)
+
 twitch_secrets = {
     "TOKEN": None,
     "REFRESH_TOKEN": None,
@@ -86,7 +89,7 @@ def setup_twitch():
 
     auth = UserAuthenticator(twitch, target_scope, force_verify=False)
 
-    auth.port = config.get("OAUTH_PORT", 17563)
+    auth.port = OAUTH_PORT
     auth.url = f"http://localhost:{auth.port}"
 
     if (not TOKEN) or (not REFRESH_TOKEN) or (NEVER_CACHE_TWITCH):
@@ -189,7 +192,7 @@ async def send_poll_data(payload):
 
 
 loop = asyncio.get_event_loop()
-loop.create_task(app.run_task(port=config.get("LOCAL_PORT", 5000)))
+loop.create_task(app.run_task(port=LOCAL_PORT))
 loop.create_task(poll())
 
 try:
