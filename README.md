@@ -38,7 +38,13 @@ You should be fine running it for a stream segment that uses a poll or two, or a
 7. Copy your Twitch ID to `USER_ID` in your `config.yaml`
 8. Save `config.yaml`.
 9. Run the `.exe`. Go through the Twitch prompts that open on your browser.
-10. On OBS, add a Browser source with the URL `http://localhost:5000`. Remove everything in the **Custom CSS** box, and ensure that **Shutdown source when not visible** and **Refresh browser when scene becomes active** are both unchecked. Your source will (or at least should) be blank when added.
+10. Set up OBS.
+    - Add a Browser source with the URL `http://localhost:5000`.
+    - Remove everything in the **Custom CSS** box.
+    - Ensure that **Shutdown source when not visible** and **Refresh browser when scene becomes active** are both unchecked.
+    - Your source will (or at least should) be blank when added.
+    - Optionally, set your **Width** and **Height** to `350` and `400`
+    - ![setup obs source](deploy/assets/setup_obs_source.png)
 11. You are done! Run a poll on your channel (you do not need to be streaming) and see if it shows up on OBS.
 
 # Poll Creator #
