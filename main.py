@@ -86,7 +86,14 @@ REFRESH_TOKEN = twitch_secrets["REFRESH_TOKEN"]
 
 headers = {"content-type": "application/json"}
 
-twitch = Twitch(CLIENT_ID, CLIENT_SECRET)
+# What's worrying is that this errors on windows but not linux.
+try:
+    twitch = Twitch(CLIENT_ID, CLIENT_SECRET)
+except TwitchAuthorizationException as e:
+    error = " ".join(e.args)
+    print(f"[ERROR] {error}")
+    abort()
+
 twitch.session = None
 
 
