@@ -22,6 +22,3 @@ INACTIVE_COUNT: 30
 
 # Never caches twitch oauth, if it keeps breaking or whatever.
 NEVER_CACHE_TWITCH: false
-
-# Debug mode. Set to true for testing purposes.
-DEBUG: false

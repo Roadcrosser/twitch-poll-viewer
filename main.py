@@ -28,8 +28,6 @@ INACTIVE_COUNT = config["INACTIVE_COUNT"]
 
 NEVER_CACHE_TWITCH = config.get("NEVER_CACHE_TWITCH", False)
 
-DEBUG = config["DEBUG"]
-
 twitch_secrets = {
     "TOKEN": None,
     "REFRESH_TOKEN": None,
