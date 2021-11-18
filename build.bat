@@ -1,5 +1,5 @@
 pyinstaller -F ^
-    --name "Twitch Poll Viewer"
+    --name "Twitch Poll Viewer" ^
     --add-data "templates;templates" ^
     --add-data "static;static" ^
     --add-data "config.sample.yaml;." ^
