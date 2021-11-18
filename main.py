@@ -1,9 +1,7 @@
 import atexit
 
-atexit.register(input, "\nAn error may have occured. Press Enter to quit...")
-
 from twitchAPI.twitch import Twitch
-from twitchAPI.types import InvalidRefreshTokenException
+from twitchAPI.types import InvalidRefreshTokenException, TwitchAuthorizationException
 from twitchAPI.oauth import UserAuthenticator, refresh_access_token
 from quart import Quart, render_template, websocket, copy_current_websocket_context
 from enum import Enum
@@ -17,9 +15,23 @@ import asyncio
 
 import yaml
 
+atexit.register(input, "\nAn error may have occured. Press Enter to quit...")
+
+
+def abort():
+    atexit._run_exitfuncs()
+    exit()
+
+
 app = Quart(__name__)
 
-with open("config.yaml") as fl:
+CONFIG_FP = "config.yaml"
+
+if not os.path.isfile(CONFIG_FP):
+    print(f"[ERROR] Config file not found! ({CONFIG_FP})")
+    abort()
+
+with open(CONFIG_FP) as fl:
     config = yaml.load(fl, Loader=yaml.FullLoader)
 
 USER_ID = config["USER_ID"]
@@ -84,7 +96,12 @@ def setup_twitch():
     global REFRESH_TOKEN
 
     # setting up Authentication and getting your user id
-    twitch.authenticate_app([])
+    try:
+        twitch.authenticate_app([])
+    except TwitchAuthorizationException as e:
+        error = " ".join(e.args)
+        print(f"[ERROR] {error}")
+        abort()
 
     # Gotta do this when the lib doesn't support it yet
     class extra_scopes(Enum):
