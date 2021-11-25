@@ -2,6 +2,8 @@
 
 View twitch polls on OBS
 
+[Seen in action here!](https://www.youtube.com/watch?v=srGyEhWmtGM)
+
 ![poll sample](deploy/assets/poll_sample.png)
 
 ---
