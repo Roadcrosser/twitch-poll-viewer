@@ -33,10 +33,8 @@ You should be fine running it for a stream segment that uses a poll or two, or a
 5. Copy your **Client ID** and **Client Secret** values that are displayed on the **Manage Application** page and copy them to `CLIENT_ID` and `CLIENT_SECRET` in your `config.yaml`.
     - The values in the image below are examples and should not actually be used.
         -  ![setup client details](deploy/assets/setup_client_details.png)
-6. Get your Twitch ID [here](https://codepen.io/Alca/full/RwaredM).
-    - Enter your Twitch username in the `Twitch Login` box, and click **Lookup Login**
-    - Your Twitch ID is the 10-digit number that shows underneath your name in the window that pops up, as in the following image (highlighted with the red square).
-        - ![setup twitch id](deploy/assets/setup_twitch_id.png)
+6. Get your Twitch ID.
+    - You can try this [Chrome Extension](https://chrome.google.com/webstore/detail/twitch-username-and-user/laonpoebfalkjijglbjbnkfndibbcoon) (or [Firefox](https://addons.mozilla.org/en-US/firefox/addon/twitch-username-and-user-id/)) (more info [here](https://github.com/swiftyspiffy/Twitch-Username-and-User-ID-Translator)) to get your ID from your username.
 7. Copy your Twitch ID to `USER_ID` in your `config.yaml`
 8. Save `config.yaml`.
 9. Run the `.exe`. Go through the Twitch prompts that open on your browser.
